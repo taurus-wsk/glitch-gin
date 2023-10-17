@@ -1,6 +1,6 @@
 {
   "rewrites": [{
     "source": "/(.*)",
-    "destination": "/$1"
+    "destination": "http://localhost:3000/$1"
   }]
 }

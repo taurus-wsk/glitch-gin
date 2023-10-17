@@ -16,6 +16,7 @@ type Todo struct {
 }
 
 func Start() {
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 
 	db, err := gorm.Open("sqlite3", "test.db")

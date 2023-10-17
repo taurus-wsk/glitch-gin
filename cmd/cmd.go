@@ -1,13 +1,16 @@
 package cmd
 
 import (
+	"gorm.io/gorm"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/sqlite"
+	"gorm.io/driver/mysql"
 )
+
+var DB *gorm.DB
 
 type Todo struct {
 	ID     uint   `json:"id"`
@@ -18,15 +21,19 @@ type Todo struct {
 func Start() {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
-
-	db, err := gorm.Open("sqlite3", "test.db")
+	sqltext := "eckert:21fc0da1b5e38e32@tcp(mysql.sqlpub.com:3306)/docker_test?timeout=60s&parseTime=True&charset=utf8mb4,utf8"
+	db, err := gorm.Open(mysql.Open(sqltext))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	defer db.Close()
+	DB, err := db.DB()
+	DB.SetMaxOpenConns(256)
+	DB.SetMaxIdleConns(8)
+	DB.SetConnMaxLifetime(360 * time.Second)
 
-	db.AutoMigrate(&Todo{})
+	//db1, _ :=db.DB()
+	//defer db1.Close()
 
 	router.POST("/todos", func(c *gin.Context) {
 		var todo Todo

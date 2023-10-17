@@ -34,7 +34,7 @@ func Start() {
 
 	//db1, _ :=db.DB()
 	//defer db1.Close()
-
+	log.Print("hh")
 	router.POST("/todos", func(c *gin.Context) {
 		var todo Todo
 		c.BindJSON(&todo)
@@ -90,10 +90,8 @@ func Start() {
 	})
 
 	// 监听指定端口
-	err = router.Run(":3000")
+	err = router.Run(":8080")
 	if err != nil {
 		log.Fatal(err)
 	}
 }
-
-func main() {}

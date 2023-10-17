@@ -5,5 +5,10 @@
       "use": "@vercel/go"
     }
   ],
+  "functions": {
+    "/**": {
+      "runtime": "go1.x"
+    }
+  },
   "routes": [{ "src": "/.*", "dest": "main.go" }]
 }

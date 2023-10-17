@@ -1,14 +1,6 @@
 {
-  "builds": [
-    {
-      "src": "main.go",
-      "use": "@vercel/go"
-    }
-  ],
-  "functions": {
-    "/**": {
-      "runtime": "go1.x"
-    }
-  },
-  "routes": [{ "src": "/.*", "dest": "main.go" }]
+  "rewrites": [{
+    "source": "/(.*)",
+    "destination": "/$1"
+  }]
 }

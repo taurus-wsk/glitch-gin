@@ -16,7 +16,7 @@ type Todo struct {
 	Status bool   `json:"status"`
 }
 
-func main() {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	router := gin.Default()
 
 	db, err := gorm.Open("sqlite3", "test.db")
@@ -94,3 +94,4 @@ func main() {
 	}
 }
 
+func main() {}

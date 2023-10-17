@@ -34,11 +34,11 @@ func Start() {
 
 	//db1, _ :=db.DB()
 	//defer db1.Close()
-	log.Print("hh")
+	log.Print("hh1")
 	router.POST("/todos", func(c *gin.Context) {
 		var todo Todo
 		c.BindJSON(&todo)
-
+		log.Print("hh2")
 		err := db.Create(&todo).Error
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -50,7 +50,7 @@ func Start() {
 
 	router.GET("/todos", func(c *gin.Context) {
 		var todos []Todo
-
+		log.Print("hh3")
 		err := db.Find(&todos).Error
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -63,7 +63,7 @@ func Start() {
 	router.PUT("/todos/:id", func(c *gin.Context) {
 		id := c.Param("id")
 		var todo Todo
-
+		log.Print("hh4")
 		err := db.Where("id = ?", id).First(&todo).Error
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -79,7 +79,7 @@ func Start() {
 	router.DELETE("/todos/:id", func(c *gin.Context) {
 		id := c.Param("id")
 		var todo Todo
-
+		log.Print("hh5")
 		err := db.Where("id = ?", id).Delete(&todo).Error
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})

@@ -2,8 +2,7 @@
   "builds": [
     {
       "src": "main.go",
-      "use": "@vercel/go",
-      "root": "./glitch-gin"
+      "use": "@vercel/go"
     }
   ],
   "routes": [{ "src": "/.*", "dest": "main.go" }]

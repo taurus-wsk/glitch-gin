@@ -49,10 +49,11 @@ func init() {
 		log.Fatal(err)
 	}
 
-	DB, err := db.DB()
-	DB.SetMaxOpenConns(256)
-	DB.SetMaxIdleConns(8)
-	DB.SetConnMaxLifetime(360 * time.Second)
+	DB = db
+	dbSql, _ := db.DB()
+	dbSql.SetMaxOpenConns(256)
+	dbSql.SetMaxIdleConns(8)
+	dbSql.SetConnMaxLifetime(360 * time.Second)
 	app = gin.New()
 	r := app.Group("/api")
 	myRoute(r)

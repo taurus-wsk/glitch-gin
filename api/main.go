@@ -33,6 +33,11 @@ func myRoute(r *gin.RouterGroup) {
 		}
 		c.JSON(http.StatusOK, gin.H{"todos": todos})
 	})
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"ping": "pong",
+		})
+	})
 }
 
 func init() {

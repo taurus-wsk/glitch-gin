@@ -24,13 +24,15 @@ var DB *gorm.DB
 
 func myRoute(r *gin.RouterGroup) {
 	r.GET("/todos", func(c *gin.Context) {
-		var todos []Todo
+		todos := make([]Todo, 0)
 		log.Print("hh3")
 		err := DB.Find(&todos).Error
 		if err != nil {
+			log.Print("hh4")
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
 		}
+		log.Print("hh5")
 		c.JSON(http.StatusOK, gin.H{"todos": todos})
 	})
 	r.GET("/ping", func(c *gin.Context) {
